@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'content' %}
+  <center>
+
+    {%if my_answer %}
+    <div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+      {{ my_answer }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    <br/><br/>
+    
+    <h1><img src="static/images/{{num_1}}.png"> <img src="static/images/divide.png"> <img src="static/images/{{num_2}}.png"> </h1>    
+    <br/><br/>
+
+    <form action="{% url 'divide' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Type Your Answer Here" name="answer">
+        <label for="floatingInput">Type Your Answer Here</label>
+        <input type="hidden" name="old_num_1" value="{{num_1}}">
+        <input type="hidden" name="old_num_2" value="{{num_2}}">
+      </div>
+
+    <br/>
+    <button type="submit" class="btn btn-secondary">Submit</button>
+
+  </center>
+{% endblock %}   
